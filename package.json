@@ -6,7 +6,9 @@
   "scripts": {
     "test": "standard src/**/*.js",
     "build": "babel src -d lib && swagger-to-md -y spec/swagger.yaml > spec/api.md",
-    "prepublish": "babel src -d lib && swagger-to-md -y spec/swagger.yaml > spec/api.md"
+    "prepublish": "babel src -d lib && swagger-to-md -y spec/swagger.yaml > spec/api.md",
+    "doc": "yaml2json spec/swagger.yaml > spec/swagger_tmp.json && swagger-to-html spec/swagger_tmp.json swagger; rm spec/swagger_tmp.json",
+    "publish-docs": "yaml2json spec/swagger.yaml > spec/swagger_tmp.json && swagger-to-html spec/swagger_tmp.json swagger; rm spec/swagger_tmp.json && (git diff --exit-code > /dev/null || (echo 'No clean head. Please commit or stash before pushing docs.' && exit 1))  && (git diff --cached --exit-code  > /dev/null  || (echo 'No clean head. Please commit or stash before pushing docs.' && exit 1)) && git add -f swagger/* && git commit -m '(doc) New documentation.' && git subtree split --prefix swagger -b gh-pages && git push -f origin gh-pages:gh-pages && git branch -D gh-pages && git reset HEAD~1"
   },
   "license": "MIT",
   "dependencies": {
@@ -21,6 +23,7 @@
     "babel-register": "^6.7.2",
     "mocha": "^2.4.5",
     "standard": "^6.0.8",
+    "swagger-to-html": "^0.4.0",
     "swagger-to-md": "^1.0.0"
   }
 }
