@@ -94,6 +94,19 @@ export default function (serve) {
         })
     })
 
+    it('it is impossible to add two components with the same name', () => {
+      var app = serve({Components: []})
+      return chai.request(app)
+        .post('/components')
+        .send({meta: 'a', ports: [{}], version: '1.0.0'})
+        .then((res) => chai.request(app)
+          .post('/components')
+          .send({meta: 'a', ports: [{}], version: '1.0.0'}))
+        .catch((err) => {
+          expect(err.status).to.equal(400)
+        })
+    })
+
     it('updates a component', () => {
       var app = serve({Components: [{meta: 'b'}, {meta: 'a', value: 1, version: '0.1.0'}, {meta: 'c'}]})
       return chai.request(app)
