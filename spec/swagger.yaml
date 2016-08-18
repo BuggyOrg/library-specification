@@ -1,0 +1,277 @@
+swagger: '2.0'
+info:
+  title: Buggy Library API
+  description: Buggy Component and meta information API
+  version: "0.1.0"
+produces:
+  - application/json
+paths:
+  /info:
+    get:
+      summary: Server information
+      description: |
+        Sends information about the server. Which version it runs and which backend it uses.
+      responses:
+        200:
+          description: An object with the server information
+          schema:
+            type: object
+            properties:
+              version:
+                type: 'string'
+              type:
+                type: 'string'
+          examples:
+            application/json:
+              version: '0.1.0'
+              type: 'buggy-library-file-database'
+  /components:
+    get:
+      summary: List all components
+      description: |
+        All the component meta ids of all registered components in this component library.
+      responses:
+        200:
+          description: An array of all component meta IDs
+          schema:
+            type: array
+            items: 
+              type: string
+          examples:
+            application/json:
+              ['math/add', 'math/multiply']
+    post:
+      summary: Insert a new component
+      description: |
+        Add a new component to the library. It is not possible to have two components with the same meta key and version in the registry.
+      responses:
+        201:
+          description: The component was added successuflly.
+        400:
+          description: The component already exists or it is not in a valid format and thus cannot be inserted.
+  /components/count:
+    get:
+      summary: Number of components
+      description: Gives the number of all registered components in the registry.
+      responses:
+        200:
+          description: The number of components.
+          schema:
+            type: number
+  /components/get/{meta}:
+    get:
+      summary: Information for a specific component.
+      description: |
+        Gets a JSON object describing the latest version of the component. It looks for the component via its meta key (i.e. component.meta).
+        The latest version is specified via semver.
+      parameters:
+        - name: meta
+          description: Meta key of the component
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: A component with the meta key was found and included in the response.
+          schema:
+            type: object
+        404:
+          description: No component with the given meta key was found.
+  /components/get/{meta}/version/{version}:
+    get:
+      summary: Information for a specific component.
+      description: |
+        Gets a JSON object describing the given version of the component. It looks for the component via its meta key (i.e. component.meta).
+      parameters:
+        - name: meta
+          description: Meta key of the component
+          in: path
+          required: true
+          type: string
+        - name: version
+          description: The version of the component
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: A component with the meta key was found and included in the response.
+          schema:
+            type: object
+        404:
+          description: No component with the given meta key at the specified version was found.
+  /meta/{component}:
+    get:
+      summary: All meta keys for a component
+      description: |
+        Returns an array of all meta keys for this component, without their values.
+      parameters:
+        - name: component
+          description: Meta key for the component
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: An array of all keys
+          schema:
+            type: array
+            items:
+              type: string
+        400:
+          description: No component with this meta key exists.
+  /meta/{component}/version/{version}:
+    get:
+      summary: All meta keys for a component @version
+      description: |
+        Returns an array of all meta keys for this component that are valid in the given version, without their values.
+      parameters:
+        - name: component
+          description: Meta key for the component
+          in: path
+          required: true
+          type: string
+        - name: version
+          description: The version of the component. This must be a valid semver version. Valid meta keys are those that at the specified version or the latest update before this version. E.g. a component at version 1.2.0 has a value specified in version 1.1.0 but not in 1.2.0, then the 1.1.0 version value is taken.
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: An array of all keys valid at the given version
+          schema:
+            type: array
+            items:
+              type: string
+        400:
+          description: No component with this meta key exists.
+  /meta/{component}/{key}:
+    get:
+      summary: Meta key value for a component
+      description: |
+        Returns the value of the meta key for this component.
+      parameters:
+        - name: component
+          description: Meta key for the component
+          in: path
+          required: true
+          type: string
+        - name: key
+          description: Meta key that is created or updated.
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: The value of the meta key. Type can be anything.
+        400:
+          description: No component with this meta key exists.
+    post:
+      summary: Set a meta key
+      description: |
+        Sets a meta key for the specified component for the latest version.
+      parameters:
+        - name: component
+          description: Identifier for the component
+          in: path
+          required: true
+          type: string
+        - name: key
+          description: Meta key that is created or updated.
+          in: path
+          required: true
+          type: string
+      responses:
+        204:
+          description: The key was updated for the component.
+        400:
+          description: No component with this meta key exists.
+        404:
+          description: The component does not have meta information for this key.
+  /meta/{component}/version/{version}/{key}:
+    get:
+      summary: Meta key value for a component
+      description: |
+        Returns the value of the meta key for this component.
+      parameters:
+        - name: component
+          description: Meta key for the component
+          in: path
+          required: true
+          type: string
+        - name: version
+          description: The version of the component. This must be a valid semver version. Valid meta keys are those that at the specified version or the latest update before this version. E.g. a component at version 1.2.0 has a value specified in version 1.1.0 but not in 1.2.0, then the 1.1.0 version value is taken.
+          in: path
+          required: true
+          type: string
+        - name: key
+          description: Meta key that is created or updated.
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: The value of the meta key that is valid at the given version. Type can be anything.
+        400:
+          description: No component with this meta key exists.
+        404:
+          description: The component does not have meta information for this key.
+    post:
+      summary: Set a meta key
+      description: |
+        Sets a meta key for the specified component for the latest version.
+      parameters:
+        - name: component
+          description: Identifier for the component
+          in: path
+          required: true
+          type: string
+        - name: version
+          description: The version of the component. This must be a valid semver version. Valid meta keys are those that at the specified version or the latest update before this version. E.g. a component at version 1.2.0 has a value specified in version 1.1.0 but not in 1.2.0, then the 1.1.0 version value is taken.
+          in: path
+          required: true
+          type: string
+        - name: key
+          description: Meta key that is created or updated.
+          in: path
+          required: true
+          type: string
+      responses:
+        204:
+          description: The key was updated for the component in the given version.
+        400:
+          description: No component with this meta key exists.
+  /config/{key}:
+    get:
+      summary: A configuration value
+      description: Get the configuration value for key
+      parameters:
+        - name: key
+          description: The configuration key
+          in: path
+          type: string
+          required: true
+      responses:
+        200:
+          description: The value of the key.
+        404:
+          description: No such key is defined.
+    post:
+      summary: Set a configuration value
+      description: Create or update a configuration key and its value.
+      parameters:
+        - name: key
+          description: The configuration key
+          in: path
+          type: string
+          required: true
+      responses:
+        204:
+          description: The key was successfully updated.
+  /export:
+    get:
+      summary: Returns the whole database
+      description: Get the JSON document describing the whole database.
+      responses:
+        200:
+          description: The whole DB is returned.

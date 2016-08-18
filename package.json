@@ -1,0 +1,9 @@
+{
+  "name": "@buggyorg/library-specification",
+  "version": "0.1.0",
+  "description": "Specification for buggy component library servers.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "MIT"
+}
