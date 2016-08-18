@@ -83,15 +83,15 @@ export default function (serve) {
 
     it('inserting an invalid component gives a 400 status code', () => {
       var app = serve({Components: []})
-      return chai.request(app)
+      return expect(chai.request(app)
         .post('/components')
         .send({meta: 'a', ports: [{}]})
         .then((res) => {
-          expect(false).to.be.true
+          expect.fail('Adding an invalid component should send a 400 status code.')
         })
         .catch((err) => {
           expect(err.status).to.equal(400)
-        })
+        }))
     })
 
     it('it is impossible to add two components with the same name', () => {
@@ -102,6 +102,9 @@ export default function (serve) {
         .then((res) => chai.request(app)
           .post('/components')
           .send({meta: 'a', ports: [{}], version: '1.0.0'}))
+        .then((res) => {
+          expect.fail('Adding a component twice should be impossible.')
+        })
         .catch((err) => {
           expect(err.status).to.equal(400)
         })
