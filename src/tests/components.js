@@ -36,7 +36,7 @@ export default function (setup) {
           .get('/components')
         )
         .then((res) => {
-          expect(res.body).to.eql(['a', 'b'])
+          expect(res.body).to.have.members(['a', 'b'])
         })
     })
 

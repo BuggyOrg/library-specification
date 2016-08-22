@@ -79,7 +79,7 @@ export default function (setup) {
         )
         .then((res) => {
           expect(res.status).to.equal(200)
-          expect(res.body).to.eql(['x', 'y'])
+          expect(res.body).to.have.members(['x', 'y'])
         })
     })
 
@@ -109,7 +109,7 @@ export default function (setup) {
         )
         .then((res) => {
           expect(res.status).to.equal(200)
-          expect(res.body).to.eql(['x', 'y'])
+          expect(res.body).to.have.members(['x', 'y'])
         })
     })
 
