@@ -159,7 +159,7 @@ export default function (setup) {
     it('fails to get meta information for a non-existing component', () => {
       return setup({Components: [{meta: 'a', version: '0.1.0'}], meta: {a: {x: [{value: 'y', version: '0.1.0'}]}}})
         .then((app) => {
-          expect(chai.request()
+          expect(chai.request(app)
             .get('/meta/b/x')
             .then((res) => {
             })
@@ -170,7 +170,7 @@ export default function (setup) {
     it('fails to set meta information for a non-existing component', () => {
       return setup({Components: [], meta: {}})
         .then((app) =>
-          expect(chai.request()
+          expect(chai.request(app)
             .post('/meta/b/x')
             .send({value: 'z'})
             .then((res) => {
@@ -182,7 +182,7 @@ export default function (setup) {
     it('errors if the post value is invalid', () => {
       return setup({Components: [{meta: 'a', version: '0.1.0'}], meta: {a: {x: [{value: 'y', version: '0.1.0'}]}}})
         .then((app) =>
-          expect(chai.request()
+          expect(chai.request(app)
             .post('/meta/a/x')
             .send({X: 4})
             .then((res) => {
