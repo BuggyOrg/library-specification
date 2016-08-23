@@ -9,18 +9,6 @@ export default function (setup) {
   var expect = chai.expect
 
   describe('Components', () => {
-    it('exposes basic information', () => {
-      return setup({})
-        .then((app) =>
-          chai.request(app)
-          .get('/info')
-        )
-        .then((res) => {
-          expect(res.status).to.equal(200)
-          expect(res.body).to.be.ok
-        })
-    })
-
     it('gets the number of components', () => {
       return setup({Components: []})
         .then((app) =>
