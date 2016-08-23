@@ -2,7 +2,6 @@
 
 import chai from 'chai'
 import chaiHttp from 'chai-http'
-import chaiAsPromised from 'chai-as-promised'
 
 import testComponents from './components'
 import testConfig from './config'

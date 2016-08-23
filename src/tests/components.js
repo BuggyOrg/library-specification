@@ -80,7 +80,7 @@ export default function (setup) {
 
     it('inserts new components', () => {
       return setup({Components: []})
-        .then((app) => 
+        .then((app) =>
           chai.request(app)
             .post('/components')
             .send({meta: 'a', ports: [{}], version: '1.0.0'})
@@ -127,7 +127,7 @@ export default function (setup) {
 
     it('updates a component', () => {
       setup({Components: [{meta: 'b'}, {meta: 'a', value: 1, version: '0.1.0'}, {meta: 'c'}]})
-        .then((app) => 
+        .then((app) =>
           chai.request(app)
             .post('/components')
             .send({meta: 'a', value: 2, ports: [{}], version: '0.2.0'})
@@ -136,7 +136,7 @@ export default function (setup) {
             })
             .then(() => chai.request(app).get('/components/get/a'))
             .then((res) => expect(res.body.value).to.equal(2))
-        )  
+        )
     })
   })
 }

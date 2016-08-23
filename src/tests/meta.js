@@ -88,7 +88,7 @@ export default function (setup) {
         Components: [{meta: 'a', version: '1.0.0'}, {meta: 'a', version: '0.8.0'}],
         meta: {a: {x: [{value: 'y', version: '0.8.0'}], y: [{value: 'z', version: '1.0.0'}]}}
       })
-        .then((app) => 
+        .then((app) =>
           chai.request(app)
           .get('/meta/a/version/0.8.0')
         )
