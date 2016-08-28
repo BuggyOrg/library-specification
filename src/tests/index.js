@@ -7,6 +7,8 @@ import testComponents from './components'
 import testConfig from './config'
 import testMeta from './meta'
 
+import { normalizeDb } from './util'
+
 export default function (setup) {
   chai.use(chaiHttp)
   var expect = chai.expect
@@ -40,7 +42,7 @@ export default function (setup) {
         )
         .then((res) => {
           expect(res.status).to.equal(200)
-          expect(res.body).to.eql(db)
+          expect(normalizeDb(res.body)).to.deep.equal(normalizeDb(db))
         })
     })
   })
