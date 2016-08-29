@@ -9,7 +9,7 @@ import _ from 'lodash'
 export function normalizeDb (db) {
   db = _.cloneDeep(db)
   return {
-    Components: _.sortBy(db.Components || [], ['meta', 'version']),
+    Components: _.sortBy(db.Components || [], ['componentId', 'version']),
     meta: _.map(db.meta || {}, (keyValues, meta) =>
       _.map(keyValues, (values, key) => _.sortBy(values, ['version']))
     ),

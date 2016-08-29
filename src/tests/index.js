@@ -30,7 +30,7 @@ export default function (setup) {
 
     it('can export the complete DB', () => {
       const db = {
-        Components: [{meta: 'a', version: '1.0.0'}, {meta: 'a', version: '0.8.0'}],
+        Components: [{componentId: 'a', version: '1.0.0'}, {componentId: 'a', version: '0.8.0'}],
         meta: {a: {x: [{value: 'y', version: '0.8.0'}, {value: 'z', version: '1.0.0'}]}},
         config: { a: 1 }
       }

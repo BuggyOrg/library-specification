@@ -18,7 +18,7 @@ export default function (setup) {
         .then((res) => {
           expect(res.body).to.equal(0)
         })
-        .then(() => setup({Components: [{meta: 'a', value: 1, version: '0.1.0'}, {meta: 'b', value: 2, version: '1.0.0'}]}))
+        .then(() => setup({Components: [{componentId: 'a', value: 1, version: '0.1.0'}, {componentId: 'b', value: 2, version: '1.0.0'}]}))
         .then((app) =>
           chai.request(app)
           .get('/components')
@@ -29,7 +29,7 @@ export default function (setup) {
     })
 
     it('can query a specific component', () => {
-      return setup({Components: [{meta: 'a', value: 1, version: '0.1.0'}, {meta: 'b', value: 2, version: '1.0.0'}]})
+      return setup({Components: [{componentId: 'a', value: 1, version: '0.1.0'}, {componentId: 'b', value: 2, version: '1.0.0'}]})
         .then((app) =>
           chai.request(app)
           .get('/components/get/a')
@@ -40,7 +40,7 @@ export default function (setup) {
     })
 
     it('can query a specific component with a given version', () => {
-      return setup({Components: [{meta: 'a', value: 1, version: '0.1.0'}, {meta: 'a', value: 2, version: '0.2.0'}]})
+      return setup({Components: [{componentId: 'a', value: 1, version: '0.1.0'}, {componentId: 'a', value: 2, version: '0.2.0'}]})
         .then((app) =>
           chai.request(app)
           .get('/components/get/a/version/0.2.0')
@@ -51,7 +51,7 @@ export default function (setup) {
     })
 
     it('sends an error code if the specific component with a given version does not exist', () => {
-      return setup({Components: [{meta: 'a', value: 1, version: '0.1.0'}, {meta: 'a', value: 2, version: '0.2.0'}]})
+      return setup({Components: [{componentId: 'a', value: 1, version: '0.1.0'}, {componentId: 'a', value: 2, version: '0.2.0'}]})
         .then((app) =>
           chai.request(app)
           .get('/components/get/a/version/0.1.2')
@@ -83,7 +83,7 @@ export default function (setup) {
         .then((app) =>
           chai.request(app)
             .post('/components')
-            .send({meta: 'a', ports: [{}], version: '1.0.0'})
+            .send({componentId: 'a', ports: [{}], version: '1.0.0'})
             .then((res) => {
               expect(res.status).to.equal(204)
             })
@@ -97,7 +97,7 @@ export default function (setup) {
         .then((app) =>
           chai.request(app)
             .post('/components')
-            .send({meta: 'a', ports: [{}]})
+            .send({componentId: 'a', ports: [{}]})
             .then((res) => {
               expect.fail('Adding an invalid component should send a 400 status code.')
             })
@@ -112,10 +112,10 @@ export default function (setup) {
         .then((app) =>
           chai.request(app)
             .post('/components')
-            .send({meta: 'a', ports: [{}], version: '1.0.0'})
+            .send({componentId: 'a', ports: [{}], version: '1.0.0'})
             .then((res) => chai.request(app)
               .post('/components')
-              .send({meta: 'a', ports: [{}], version: '1.0.0'}))
+              .send({componentId: 'a', ports: [{}], version: '1.0.0'}))
             .then((res) => {
               expect.fail('Adding a component twice should be impossible.')
             })
@@ -126,11 +126,11 @@ export default function (setup) {
     })
 
     it('updates a component', () => {
-      setup({Components: [{meta: 'b'}, {meta: 'a', value: 1, version: '0.1.0'}, {meta: 'c'}]})
+      setup({Components: [{componentId: 'b'}, {componentId: 'a', value: 1, version: '0.1.0'}, {componentId: 'c'}]})
         .then((app) =>
           chai.request(app)
             .post('/components')
-            .send({meta: 'a', value: 2, ports: [{}], version: '0.2.0'})
+            .send({componentId: 'a', value: 2, ports: [{}], version: '0.2.0'})
             .then((res) => {
               expect(res.status).to.equal(204)
             })
