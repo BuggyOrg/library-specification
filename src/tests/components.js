@@ -10,7 +10,7 @@ export default function (setup) {
 
   describe('Components', () => {
     it('gets the number of components', () => {
-      return setup({Components: []})
+      return setup({components: []})
         .then((app) =>
           chai.request(app)
           .get('/components/count')
@@ -18,7 +18,7 @@ export default function (setup) {
         .then((res) => {
           expect(res.body).to.equal(0)
         })
-        .then(() => setup({Components: [{componentId: 'a', value: 1, version: '0.1.0'}, {componentId: 'b', value: 2, version: '1.0.0'}]}))
+        .then(() => setup({components: [{componentId: 'a', value: 1, version: '0.1.0'}, {componentId: 'b', value: 2, version: '1.0.0'}]}))
         .then((app) =>
           chai.request(app)
           .get('/components')
@@ -29,7 +29,7 @@ export default function (setup) {
     })
 
     it('can query a specific component', () => {
-      return setup({Components: [{componentId: 'a', value: 1, version: '0.1.0'}, {componentId: 'b', value: 2, version: '1.0.0'}]})
+      return setup({components: [{componentId: 'a', value: 1, version: '0.1.0'}, {componentId: 'b', value: 2, version: '1.0.0'}]})
         .then((app) =>
           chai.request(app)
           .get('/components/get/a')
@@ -40,7 +40,7 @@ export default function (setup) {
     })
 
     it('can query a specific component with a given version', () => {
-      return setup({Components: [{componentId: 'a', value: 1, version: '0.1.0'}, {componentId: 'a', value: 2, version: '0.2.0'}]})
+      return setup({components: [{componentId: 'a', value: 1, version: '0.1.0'}, {componentId: 'a', value: 2, version: '0.2.0'}]})
         .then((app) =>
           chai.request(app)
           .get('/components/get/a/version/0.2.0')
@@ -51,7 +51,7 @@ export default function (setup) {
     })
 
     it('sends an error code if the specific component with a given version does not exist', () => {
-      return setup({Components: [{componentId: 'a', value: 1, version: '0.1.0'}, {componentId: 'a', value: 2, version: '0.2.0'}]})
+      return setup({components: [{componentId: 'a', value: 1, version: '0.1.0'}, {componentId: 'a', value: 2, version: '0.2.0'}]})
         .then((app) =>
           chai.request(app)
           .get('/components/get/a/version/0.1.2')
@@ -65,7 +65,7 @@ export default function (setup) {
     })
 
     it('sends an error code if the component does not exist', () => {
-      return setup({Components: []})
+      return setup({components: []})
         .then((app) =>
           chai.request(app)
           .get('/components/get/b')
@@ -79,7 +79,7 @@ export default function (setup) {
     })
 
     it('inserts new components', () => {
-      return setup({Components: []})
+      return setup({components: []})
         .then((app) =>
           chai.request(app)
             .post('/components')
@@ -93,7 +93,7 @@ export default function (setup) {
     })
 
     it('inserting an invalid component gives a 400 status code', () => {
-      return setup({Components: []})
+      return setup({components: []})
         .then((app) =>
           chai.request(app)
             .post('/components')
@@ -108,7 +108,7 @@ export default function (setup) {
     })
 
     it('it is impossible to add two components with the same name', () => {
-      return setup({Components: []})
+      return setup({components: []})
         .then((app) =>
           chai.request(app)
             .post('/components')
@@ -126,7 +126,7 @@ export default function (setup) {
     })
 
     it('updates a component', () => {
-      setup({Components: [{componentId: 'b'}, {componentId: 'a', value: 1, version: '0.1.0'}, {componentId: 'c'}]})
+      setup({components: [{componentId: 'b'}, {componentId: 'a', value: 1, version: '0.1.0'}, {componentId: 'c'}]})
         .then((app) =>
           chai.request(app)
             .post('/components')

@@ -12,7 +12,7 @@ export default function (setup) {
 
   describe('Meta information', () => {
     it('gets meta information for a component', () => {
-      return setup({Components: [{componentId: 'a', version: '1.0.0'}], meta: {a: {x: [{value: 'y', version: '1.0.0'}]}}})
+      return setup({components: [{componentId: 'a', version: '1.0.0'}], meta: {a: {x: [{value: 'y', version: '1.0.0'}]}}})
         .then((app) =>
           chai.request(app)
           .get('/meta/a/x')
@@ -25,7 +25,7 @@ export default function (setup) {
 
     it('uses latest meta information', () => {
       return setup({
-        Components: [{componentId: 'a', version: '1.0.0'}, {componentId: 'a', version: '0.8.0'}],
+        components: [{componentId: 'a', version: '1.0.0'}, {componentId: 'a', version: '0.8.0'}],
         meta: {a: {x: [{value: 'y', version: '0.8.0'}, {value: 'z', version: '1.0.0'}]}}
       })
         .then((app) =>
@@ -40,7 +40,7 @@ export default function (setup) {
 
     it('uses meta information from older components', () => {
       return setup({
-        Components: [{componentId: 'a', version: '1.0.0'}, {componentId: 'a', version: '0.8.0'}],
+        components: [{componentId: 'a', version: '1.0.0'}, {componentId: 'a', version: '0.8.0'}],
         meta: {a: {x: [{value: 'y', version: '0.8.0'}]}}
       })
         .then((app) =>
@@ -55,7 +55,7 @@ export default function (setup) {
 
     it('allows specific queries with version information', () => {
       return setup({
-        Components: [{componentId: 'a', version: '1.0.0'}, {componentId: 'a', version: '0.8.0'}],
+        components: [{componentId: 'a', version: '1.0.0'}, {componentId: 'a', version: '0.8.0'}],
         meta: {a: {x: [{value: 'y', version: '0.8.0'}, {value: 'z', version: '1.0.0'}]}}
       })
         .then((app) =>
@@ -70,7 +70,7 @@ export default function (setup) {
 
     it('can query all meta keys for a component', () => {
       return setup({
-        Components: [{componentId: 'a', version: '0.1.0'}],
+        components: [{componentId: 'a', version: '0.1.0'}],
         meta: {a: {x: [{value: 'y', version: '0.1.0'}], y: [{value: 'z', version: '0.1.0'}]}}
       })
         .then((app) =>
@@ -85,7 +85,7 @@ export default function (setup) {
 
     it('queries all meta keys for a component at a specific version', () => {
       return setup({
-        Components: [{componentId: 'a', version: '1.0.0'}, {componentId: 'a', version: '0.8.0'}],
+        components: [{componentId: 'a', version: '1.0.0'}, {componentId: 'a', version: '0.8.0'}],
         meta: {a: {x: [{value: 'y', version: '0.8.0'}], y: [{value: 'z', version: '1.0.0'}]}}
       })
         .then((app) =>
@@ -100,7 +100,7 @@ export default function (setup) {
 
     it('queries all meta keys for a component at a specific version and earlier', () => {
       return setup({
-        Components: [{componentId: 'a', version: '1.0.0'}, {componentId: 'a', version: '0.8.0'}],
+        components: [{componentId: 'a', version: '1.0.0'}, {componentId: 'a', version: '0.8.0'}],
         meta: {a: {x: [{value: 'y', version: '0.8.0'}], y: [{value: 'z', version: '1.0.0'}]}}
       })
         .then((app) =>
@@ -114,7 +114,7 @@ export default function (setup) {
     })
 
     it('sets meta information for a component', () => {
-      return setup({Components: [{componentId: 'a', version: '0.1.0'}], meta: {}})
+      return setup({components: [{componentId: 'a', version: '0.1.0'}], meta: {}})
         .then((app) =>
           chai.request(app)
           .post('/meta/a/x')
@@ -130,7 +130,7 @@ export default function (setup) {
     })
 
     it('sets meta information for the latest version of the component', () => {
-      return setup({Components: [{componentId: 'a', version: '0.1.0'}, {componentId: 'a', version: '0.2.0'}], meta: {}})
+      return setup({components: [{componentId: 'a', version: '0.1.0'}, {componentId: 'a', version: '0.2.0'}], meta: {}})
         .then((app) =>
           chai.request(app)
             .post('/meta/a/x')
@@ -146,7 +146,7 @@ export default function (setup) {
     })
 
     it('fails to get non-existing meta information', () => {
-      return setup({Components: [{componentId: 'a', version: '0.1.0'}], meta: {a: {x: [{value: 'y', version: '0.1.0'}]}}})
+      return setup({components: [{componentId: 'a', version: '0.1.0'}], meta: {a: {x: [{value: 'y', version: '0.1.0'}]}}})
         .then((app) => {
           expect(chai.request(app)
             .get('/meta/a/z')
@@ -157,7 +157,7 @@ export default function (setup) {
     })
 
     it('fails to get meta information for a non-existing component', () => {
-      return setup({Components: [{componentId: 'a', version: '0.1.0'}], meta: {a: {x: [{value: 'y', version: '0.1.0'}]}}})
+      return setup({components: [{componentId: 'a', version: '0.1.0'}], meta: {a: {x: [{value: 'y', version: '0.1.0'}]}}})
         .then((app) => {
           expect(chai.request(app)
             .get('/meta/b/x')
@@ -168,7 +168,7 @@ export default function (setup) {
     })
 
     it('fails to set meta information for a non-existing component', () => {
-      return setup({Components: [], meta: {}})
+      return setup({components: [], meta: {}})
         .then((app) =>
           expect(chai.request(app)
             .post('/meta/b/x')
@@ -180,7 +180,7 @@ export default function (setup) {
     })
 
     it('errors if the post value is invalid', () => {
-      return setup({Components: [{componentId: 'a', version: '0.1.0'}], meta: {a: {x: [{value: 'y', version: '0.1.0'}]}}})
+      return setup({components: [{componentId: 'a', version: '0.1.0'}], meta: {a: {x: [{value: 'y', version: '0.1.0'}]}}})
         .then((app) =>
           expect(chai.request(app)
             .post('/meta/a/x')
