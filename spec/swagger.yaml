@@ -48,7 +48,9 @@ paths:
         201:
           description: The component was added successuflly.
         400:
-          description: The component already exists or it is not in a valid format and thus cannot be inserted.
+          description: The component it is not in a valid format and thus cannot be inserted.
+        409:
+          description: The component already exists and thus cannot be inserted.
   /components/count:
     get:
       summary: Number of components

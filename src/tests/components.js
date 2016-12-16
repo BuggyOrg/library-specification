@@ -132,7 +132,7 @@ export default function (setup) {
               expect.fail('Adding a component twice should be impossible.')
             })
             .catch((err) => {
-              expect(err.status).to.equal(400)
+              expect(err.status).to.equal(409)
             })
         )
     })
