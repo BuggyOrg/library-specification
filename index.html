@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <div class="container">
+              <h1>Buggy Library API</h1>
+
+<p>Buggy Component and meta information API</p>
+
+
+
+<h2>Paths</h2>
+
+    
+    <div class="panel panel-method-get">
+    <div class="panel-heading">
+        <div class="method-summary">List all components</div>
+        <h3 class="panel-title"><span class="method-name">GET</span> <strong>/components</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-method-description">
+            All the component meta ids of all registered components in this component library.
+        </section>
+        
+        
+        
+    <section class="sw-response-body">
+        <p></p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            An array of all component meta IDs
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+    
+<div class="panel panel-definition">
+    <div class="panel-body">
+        
+    <section class="json-schema-array-items">
+    <div class="json-inner-schema">
+        
+
+    </div>
+</section>
+    </div>
+</div>                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+    
+<div class="panel panel-definition">
+    <div class="panel-body">
+        
+    <section class="json-schema-array-items">
+    <div class="json-inner-schema">
+        
+
+    </div>
+</section>
+    </div>
+</div></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    <div class="panel panel-method-post">
+    <div class="panel-heading">
+        <div class="method-summary">Insert a new component</div>
+        <h3 class="panel-title"><span class="method-name">POST</span> <strong>/components</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-method-description">
+            Add a new component to the library. It is not possible to have two components with the same meta key and version in the registry.
+        </section>
+        
+        
+        
+    <section class="sw-response-body">
+        <p></p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>201</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            The component was added successuflly.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            The component it is not in a valid format and thus cannot be inserted.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+                <tr>
+                    <td>409</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            The component already exists and thus cannot be inserted.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    
+    <div class="panel panel-method-get">
+    <div class="panel-heading">
+        <div class="method-summary">Number of components</div>
+        <h3 class="panel-title"><span class="method-name">GET</span> <strong>/components/count</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-method-description">
+            Gives the number of all registered components in the registry.
+        </section>
+        
+        
+        
+    <section class="sw-response-body">
+        <p></p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            The number of components.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+    
+<div class="panel panel-definition">
+    <div class="panel-body">
+        
+
+    </div>
+</div>                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+    
+<div class="panel panel-definition">
+    <div class="panel-body">
+        
+
+    </div>
+</div></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    
+    <div class="panel panel-method-get">
+    <div class="panel-heading">
+        <div class="method-summary">Information for a specific component.</div>
+        <h3 class="panel-title"><span class="method-name">GET</span> <strong>/components/get/{meta}</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-method-description">
+            Gets a JSON object describing the latest version of the component. It looks for the component via its meta key (i.e. component.meta).
+The latest version is specified via semver.
+        </section>
+        
+        
+    <section class="sw-request-params">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-param-name"></th>
+                <th class="sw-param-description"></th>
+                <th class="sw-param-type"></th>
+                <th class="sw-param-data-type"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>meta</td>
+                    <td>Meta key of the component</td>
+                    <td>path</td>
+                    <td>
+                        string                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+        
+    <section class="sw-response-body">
+        <p></p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            A component with the meta key was found and included in the response.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+    
+<div class="panel panel-definition">
+    <div class="panel-body">
+        
+
+    </div>
+</div>                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+    
+<div class="panel panel-definition">
+    <div class="panel-body">
+        
+
+    </div>
+</div></td>
+                </tr>
+                <tr>
+                    <td>404</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            No component with the given meta key was found.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    
+    <div class="panel panel-method-get">
+    <div class="panel-heading">
+        <div class="method-summary">Information for a specific component.</div>
+        <h3 class="panel-title"><span class="method-name">GET</span> <strong>/components/get/{meta}/version/{version}</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-method-description">
+            Gets a JSON object describing the given version of the component. It looks for the component via its meta key (i.e. component.meta).
+        </section>
+        
+        
+    <section class="sw-request-params">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-param-name"></th>
+                <th class="sw-param-description"></th>
+                <th class="sw-param-type"></th>
+                <th class="sw-param-data-type"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>meta</td>
+                    <td>Meta key of the component</td>
+                    <td>path</td>
+                    <td>
+                        string                    </td>
+                </tr>
+                <tr>
+                    <td>version</td>
+                    <td>The version of the component</td>
+                    <td>path</td>
+                    <td>
+                        string                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+        
+    <section class="sw-response-body">
+        <p></p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            A component with the meta key was found and included in the response.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+    
+<div class="panel panel-definition">
+    <div class="panel-body">
+        
+
+    </div>
+</div>                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+    
+<div class="panel panel-definition">
+    <div class="panel-body">
+        
+
+    </div>
+</div></td>
+                </tr>
+                <tr>
+                    <td>404</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            No component with the given meta key at the specified version was found.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    
+    <div class="panel panel-method-get">
+    <div class="panel-heading">
+        <div class="method-summary">A configuration value</div>
+        <h3 class="panel-title"><span class="method-name">GET</span> <strong>/config/{key}</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-method-description">
+            Get the configuration value for key
+        </section>
+        
+        
+    <section class="sw-request-params">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-param-name"></th>
+                <th class="sw-param-description"></th>
+                <th class="sw-param-type"></th>
+                <th class="sw-param-data-type"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>key</td>
+                    <td>The configuration key</td>
+                    <td>path</td>
+                    <td>
+                        string                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+        
+    <section class="sw-response-body">
+        <p></p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            The value of the key.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+                <tr>
+                    <td>404</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            No such key is defined.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    <div class="panel panel-method-post">
+    <div class="panel-heading">
+        <div class="method-summary">Set a configuration value</div>
+        <h3 class="panel-title"><span class="method-name">POST</span> <strong>/config/{key}</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-method-description">
+            Create or update a configuration key and its value.
+        </section>
+        
+        
+    <section class="sw-request-params">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-param-name"></th>
+                <th class="sw-param-description"></th>
+                <th class="sw-param-type"></th>
+                <th class="sw-param-data-type"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>key</td>
+                    <td>The configuration key</td>
+                    <td>path</td>
+                    <td>
+                        string                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+        
+    <section class="sw-response-body">
+        <p></p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>204</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            The key was successfully updated.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    
+    <div class="panel panel-method-get">
+    <div class="panel-heading">
+        <div class="method-summary">Returns the whole database</div>
+        <h3 class="panel-title"><span class="method-name">GET</span> <strong>/export</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-method-description">
+            Get the JSON document describing the whole database.
+        </section>
+        
+        
+        
+    <section class="sw-response-body">
+        <p></p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            The whole DB is returned.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    
+    <div class="panel panel-method-get">
+    <div class="panel-heading">
+        <div class="method-summary">Server information</div>
+        <h3 class="panel-title"><span class="method-name">GET</span> <strong>/info</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-method-description">
+            Sends information about the server. Which version it runs and which backend it uses.
+        </section>
+        
+        
+        
+    <section class="sw-response-body">
+        <p></p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            An object with the server information
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+    
+<div class="panel panel-definition">
+    <div class="panel-body">
+        
+    <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">version:</span>
+                <span class="json-property-type">string</span>
+
+            </dt>
+            <dd>
+
+                
+                <div class="json-inner-schema">
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">type:</span>
+                <span class="json-property-type">string</span>
+
+            </dt>
+            <dd>
+
+                
+                <div class="json-inner-schema">
+                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</div>                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+    
+<div class="panel panel-definition">
+    <div class="panel-body">
+        
+    <section class="json-schema-properties">
+    <dl>
+            <dt>
+                <span class="json-property-name">version:</span>
+                <span class="json-property-type">string</span>
+
+            </dt>
+            <dd>
+
+                
+                <div class="json-inner-schema">
+                </div>
+            </dd>
+            <dt>
+                <span class="json-property-name">type:</span>
+                <span class="json-property-type">string</span>
+
+            </dt>
+            <dd>
+
+                
+                <div class="json-inner-schema">
+                </div>
+            </dd>
+    </dl>
+</section>
+
+    </div>
+</div></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    
+    <div class="panel panel-method-get">
+    <div class="panel-heading">
+        <div class="method-summary">All meta keys for a component</div>
+        <h3 class="panel-title"><span class="method-name">GET</span> <strong>/meta/{component}</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-method-description">
+            Returns an array of all meta keys for this component, without their values.
+        </section>
+        
+        
+    <section class="sw-request-params">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-param-name"></th>
+                <th class="sw-param-description"></th>
+                <th class="sw-param-type"></th>
+                <th class="sw-param-data-type"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>component</td>
+                    <td>Meta key for the component</td>
+                    <td>path</td>
+                    <td>
+                        string                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+        
+    <section class="sw-response-body">
+        <p></p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            An array of all keys
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+    
+<div class="panel panel-definition">
+    <div class="panel-body">
+        
+    <section class="json-schema-array-items">
+    <div class="json-inner-schema">
+        
+
+    </div>
+</section>
+    </div>
+</div>                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+    
+<div class="panel panel-definition">
+    <div class="panel-body">
+        
+    <section class="json-schema-array-items">
+    <div class="json-inner-schema">
+        
+
+    </div>
+</section>
+    </div>
+</div></td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            No component with this meta key exists.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    
+    <div class="panel panel-method-get">
+    <div class="panel-heading">
+        <div class="method-summary">All meta keys for a component @version</div>
+        <h3 class="panel-title"><span class="method-name">GET</span> <strong>/meta/{component}/version/{version}</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-method-description">
+            Returns an array of all meta keys for this component that are valid in the given version, without their values.
+        </section>
+        
+        
+    <section class="sw-request-params">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-param-name"></th>
+                <th class="sw-param-description"></th>
+                <th class="sw-param-type"></th>
+                <th class="sw-param-data-type"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>component</td>
+                    <td>Meta key for the component</td>
+                    <td>path</td>
+                    <td>
+                        string                    </td>
+                </tr>
+                <tr>
+                    <td>version</td>
+                    <td>The version of the component. This must be a valid semver version. Valid meta keys are those that at the specified version or the latest update before this version. E.g. a component at version 1.2.0 has a value specified in version 1.1.0 but not in 1.2.0, then the 1.1.0 version value is taken.</td>
+                    <td>path</td>
+                    <td>
+                        string                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+        
+    <section class="sw-response-body">
+        <p></p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            An array of all keys valid at the given version
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+    
+<div class="panel panel-definition">
+    <div class="panel-body">
+        
+    <section class="json-schema-array-items">
+    <div class="json-inner-schema">
+        
+
+    </div>
+</section>
+    </div>
+</div>                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+    
+<div class="panel panel-definition">
+    <div class="panel-body">
+        
+    <section class="json-schema-array-items">
+    <div class="json-inner-schema">
+        
+
+    </div>
+</section>
+    </div>
+</div></td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            No component with this meta key exists.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    
+    <div class="panel panel-method-get">
+    <div class="panel-heading">
+        <div class="method-summary">Meta key value for a component</div>
+        <h3 class="panel-title"><span class="method-name">GET</span> <strong>/meta/{component}/version/{version}/{key}</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-method-description">
+            Returns the value of the meta key for this component.
+        </section>
+        
+        
+    <section class="sw-request-params">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-param-name"></th>
+                <th class="sw-param-description"></th>
+                <th class="sw-param-type"></th>
+                <th class="sw-param-data-type"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>component</td>
+                    <td>Meta key for the component</td>
+                    <td>path</td>
+                    <td>
+                        string                    </td>
+                </tr>
+                <tr>
+                    <td>version</td>
+                    <td>The version of the component. This must be a valid semver version. Valid meta keys are those that at the specified version or the latest update before this version. E.g. a component at version 1.2.0 has a value specified in version 1.1.0 but not in 1.2.0, then the 1.1.0 version value is taken.</td>
+                    <td>path</td>
+                    <td>
+                        string                    </td>
+                </tr>
+                <tr>
+                    <td>key</td>
+                    <td>Meta key that is created or updated.</td>
+                    <td>path</td>
+                    <td>
+                        string                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+        
+    <section class="sw-response-body">
+        <p></p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            The value of the meta key that is valid at the given version. Type can be anything.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            No component with this meta key exists.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+                <tr>
+                    <td>404</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            The component does not have meta information for this key.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    <div class="panel panel-method-post">
+    <div class="panel-heading">
+        <div class="method-summary">Set a meta key</div>
+        <h3 class="panel-title"><span class="method-name">POST</span> <strong>/meta/{component}/version/{version}/{key}</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-method-description">
+            Sets a meta key for the specified component for the latest version.
+        </section>
+        
+        
+    <section class="sw-request-params">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-param-name"></th>
+                <th class="sw-param-description"></th>
+                <th class="sw-param-type"></th>
+                <th class="sw-param-data-type"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>component</td>
+                    <td>Identifier for the component</td>
+                    <td>path</td>
+                    <td>
+                        string                    </td>
+                </tr>
+                <tr>
+                    <td>version</td>
+                    <td>The version of the component. This must be a valid semver version. Valid meta keys are those that at the specified version or the latest update before this version. E.g. a component at version 1.2.0 has a value specified in version 1.1.0 but not in 1.2.0, then the 1.1.0 version value is taken.</td>
+                    <td>path</td>
+                    <td>
+                        string                    </td>
+                </tr>
+                <tr>
+                    <td>key</td>
+                    <td>Meta key that is created or updated.</td>
+                    <td>path</td>
+                    <td>
+                        string                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+        
+    <section class="sw-response-body">
+        <p></p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>204</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            The key was updated for the component in the given version.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            No component with this meta key exists.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    
+    <div class="panel panel-method-get">
+    <div class="panel-heading">
+        <div class="method-summary">Meta key value for a component</div>
+        <h3 class="panel-title"><span class="method-name">GET</span> <strong>/meta/{component}/{key}</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-method-description">
+            Returns the value of the meta key for this component.
+        </section>
+        
+        
+    <section class="sw-request-params">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-param-name"></th>
+                <th class="sw-param-description"></th>
+                <th class="sw-param-type"></th>
+                <th class="sw-param-data-type"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>component</td>
+                    <td>Meta key for the component</td>
+                    <td>path</td>
+                    <td>
+                        string                    </td>
+                </tr>
+                <tr>
+                    <td>key</td>
+                    <td>Meta key that is created or updated.</td>
+                    <td>path</td>
+                    <td>
+                        string                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+        
+    <section class="sw-response-body">
+        <p></p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>200</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            The value of the meta key. Type can be anything.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            No component with this meta key exists.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>    <div class="panel panel-method-post">
+    <div class="panel-heading">
+        <div class="method-summary">Set a meta key</div>
+        <h3 class="panel-title"><span class="method-name">POST</span> <strong>/meta/{component}/{key}</strong></h3>
+    </div>
+    <div class="panel-body">
+        <section class="sw-method-description">
+            Sets a meta key for the specified component for the latest version.
+        </section>
+        
+        
+    <section class="sw-request-params">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-param-name"></th>
+                <th class="sw-param-description"></th>
+                <th class="sw-param-type"></th>
+                <th class="sw-param-data-type"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>component</td>
+                    <td>Identifier for the component</td>
+                    <td>path</td>
+                    <td>
+                        string                    </td>
+                </tr>
+                <tr>
+                    <td>key</td>
+                    <td>Meta key that is created or updated.</td>
+                    <td>path</td>
+                    <td>
+                        string                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+        
+    <section class="sw-response-body">
+        <p></p>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="sw-response-code"></th>
+                <th class="sw-response-description"></th>
+                <th class="sw-response-data-type hidden-xs hidden-sm"></th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>204</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            The key was updated for the component.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+                <tr>
+                    <td>400</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            No component with this meta key exists.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+                <tr>
+                    <td>404</td>
+                    <td>
+                        <div class="sw-response-description-text">
+                            The component does not have meta information for this key.
+                        </div>
+                        <section class="visible-xs visible-sm">
+                            
+                        </section>
+                    </td>
+                    <td class="hidden-xs hidden-sm">
+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+            </div>
+</div>
+
+<h2>Definitions</h2>
+
+        </div>
+    </body>
+</html>
